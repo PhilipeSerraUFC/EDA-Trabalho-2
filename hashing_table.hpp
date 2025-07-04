@@ -16,11 +16,14 @@ Talvez não seja a melhor função Hash, porém estatisticamente os elementos es
 
 using Bucket = vector<pair<int, VanEmdeBoas*>>;
 
-class ExtensibleHash{
+class VeBExtensibleHash{
 
     vector<Bucket> buckets = {};
     int values_quantity = 0;
     int hash_size = 0;
+
+    const float MAX_OCCUPANCY_RATE = 0.75;
+    const float MIN_OCCUPANCY_RATE = 0.25;
 
     int HashFunction(int value){
         return value % hash_size;
@@ -71,8 +74,8 @@ class ExtensibleHash{
     };
 
     void Rehash(){
-        if((float)this->values_quantity > 0.75*(float)hash_size) Doubling();
-        if((float)this->values_quantity < 0.75*(float)hash_size) Halfing();
+        if((float)this->values_quantity > MAX_OCCUPANCY_RATE*(float)hash_size) Doubling();
+        if((float)this->values_quantity < MIN_OCCUPANCY_RATE*(float)hash_size) Halfing();
     };
 
     public:
