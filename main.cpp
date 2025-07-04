@@ -9,8 +9,9 @@ int main(){
     cout << "Insira o caminho do arquivo de entrada: ";
     cin >> data_path;
 
+    int number_of_bits = 32;
     vector<Operation> operations = ParserText(data_path);
-    VanEmdeBoas* tree = new VanEmdeBoas();
+    VanEmdeBoas* tree = new VanEmdeBoas(number_of_bits);
 
     OperateTree(tree, operations);
 
