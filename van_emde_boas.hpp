@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "hashing_table.hpp"
+#define INF 4294967296
 class VanEmdeBoas{
 
     bool is_empty = true;
@@ -17,7 +18,7 @@ class VanEmdeBoas{
 
     VanEmdeBoas(int number_of_bits){
         this->number_of_bits = number_of_bits;
-        clusters = new VeBExtensibleHash(); //Começa vazio
+        clusters = new VeBExtensibleHash(number_of_bits); //Começa vazio
         summary = nullptr; //É criado quando inserimos o primeiro elemento
     }
 
@@ -62,7 +63,9 @@ class VanEmdeBoas{
     }
 
     int Sucessor(int value){
+        if(value < veb_min) return veb_min;
 
+        if(value >= veb_max) return;
     }
 
     int Predecessor(int value){
@@ -74,4 +77,4 @@ class VanEmdeBoas{
     //de cada vetor é o valor da chave do cluster e depois os valores dentro dos clusters 
     vector<vector<int>> Print();
 
-}
+};

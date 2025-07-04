@@ -1,0 +1,4 @@
+- [ ] Trocar os tipos int para tipos unsigned com quantidade desejada de bits
+- [ ] Implementar VEB Sucessor
+- [ ] Implementar VEB Predecessor
+- [ ] Implementar VEB Remove

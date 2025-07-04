@@ -3,7 +3,7 @@
 using namespace std; 
 
 //forward declaration
-class VanEmdeBoas { public: VanEmdeBoas()};
+class VanEmdeBoas { public: VanEmdeBoas(int number_of_bits);};
 
 
 /* Hashing table com Doubling/Having
@@ -14,13 +14,12 @@ Talvez não seja a melhor função Hash, porém estatisticamente os elementos es
 
 */
 
-using Bucket = vector<pair<int, VanEmdeBoas*>>;
-
 class VeBExtensibleHash{
 
-    vector<Bucket> buckets = {};
+    vector<vector<pair<int, VanEmdeBoas*>>> buckets = {};
     int values_quantity = 0;
     int hash_size = 0;
+    int number_of_bits;
 
     const float MAX_OCCUPANCY_RATE = 0.75;
     const float MIN_OCCUPANCY_RATE = 0.25;
@@ -80,6 +79,10 @@ class VeBExtensibleHash{
 
     public:
 
+    VeBExtensibleHash(int number_of_bits){
+        this->number_of_bits = number_of_bits;
+    }
+
     //Retorna VanEmdeBoas associada ao valor value
     VanEmdeBoas* Search(int value){
         for(pair<int, VanEmdeBoas*> element : this->buckets[HashFunction(value)]){
@@ -101,7 +104,7 @@ class VeBExtensibleHash{
 
         if(result != nullptr) return result;
 
-        result = new VanEmdeBoas();
+        result = new VanEmdeBoas(number_of_bits);
         this->buckets[HashFunction(value)].push_back(pair<int, VanEmdeBoas*>(value, result));
 
         this->values_quantity++;
