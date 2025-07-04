@@ -17,7 +17,7 @@ using Operation = tuple<Command,int>;
 
 /*Funções auxiliares*/
 
-vector<string> split_string(string& str, char delimiter){
+vector<string> SplitString(string& str, char delimiter){
     
     std::vector<std::string> tokens;
     std::stringstream ss(str);
@@ -57,7 +57,7 @@ vector<Operation> ParserText(string data_path){
         int key;
 
         line_index ++;
-        vector<string> operation_string = split_string(line, ' ');
+        vector<string> operation_string = SplitString(line, ' ');
 
         if (operation_string[0] == "INC"){
             command = INC;
