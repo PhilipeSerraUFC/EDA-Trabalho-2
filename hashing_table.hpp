@@ -23,12 +23,52 @@ class ExtensibleHash{
     int hash_size = 0;
 
     int HashFunction(int value){
-        return value % this->hash_size;
+        return value % hash_size;
     }
 
-    void Doubling();
+    void Doubling(){
 
-    void Halfing();
+        this->hash_size = 2*this->hash_size;
+        this->buckets.resize(this->hash_size);
+
+        for(int bucket_index = 0; bucket_index < hash_size/2; bucket_index++){
+            for(int vec_index = 0; vec_index < this->buckets[bucket_index].size(); vec_index++){
+                
+                pair<int, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
+                if(HashFunction(get<int>(element)) != bucket_index){
+                    this->buckets[bucket_index].erase(this->buckets[bucket_index].begin() + vec_index);
+                    vec_index -= 1; //Volta uma casas
+                    this->buckets[HashFunction(get<int>(element))].push_back(element);
+                }
+
+            }
+
+
+        }
+
+
+    };
+
+    void Halfing(){
+
+        this->hash_size = this->hash_size/2;
+
+        for(int bucket_index = 0; bucket_index < 2*hash_size; bucket_index++){
+            for(int vec_index = 0; vec_index < this->buckets[bucket_index].size(); vec_index++){
+                
+                pair<int, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
+                if(HashFunction(get<int>(element)) != bucket_index){
+                    this->buckets[bucket_index].erase(this->buckets[bucket_index].begin() + vec_index);
+                    vec_index -= 1; //Volta uma casas
+                    this->buckets[HashFunction(get<int>(element))].push_back(element);
+                }
+
+            }
+        }
+
+        this->buckets.resize(this->hash_size);
+
+    };
 
     void Rehash(){
         if((float)this->values_quantity > 0.75*(float)hash_size) Doubling();
@@ -89,6 +129,10 @@ class ExtensibleHash{
         if(!value_is_in_bucket) return;
 
         this->buckets[element_index].erase(this->buckets[element_index].begin() + index);
+
+        this->values_quantity -= 1;
+
+        Rehash();
 
     }
 
