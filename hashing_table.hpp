@@ -3,7 +3,36 @@
 using namespace std; 
 
 //forward declaration
-class VanEmdeBoas { public: VanEmdeBoas(int number_of_bits);};
+class VeBExtensibleHash;
+
+//forward declaration
+class VanEmdeBoas { 
+    private:
+        bool is_empty = true;
+
+    public: 
+
+        int number_of_bits;
+        int veb_min;
+        int veb_max;
+
+        VeBExtensibleHash* clusters;
+        VanEmdeBoas* summary;
+
+        VanEmdeBoas(int);
+
+        void Delete();
+
+        void Insert(int);
+
+        void Remove(int);
+
+        int Sucessor(int);
+
+        int Predecessor(int);
+
+        vector<vector<int>> Print();
+};
 
 
 /* Hashing table com Doubling/Having

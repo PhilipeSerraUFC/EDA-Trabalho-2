@@ -155,8 +155,9 @@ string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
 void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
     
     string text = "";
-    
+
     for(Operation operation : operations){
+
         if(get<Command>(operation) == INC){
             tree->Insert(get<int>(operation));
             text.append("INC ");

@@ -1,1 +1,5 @@
 - [ ] Trocar os tipos int para tipos unsigned com quantidade desejada de bits
+- [ ] Fazer testes de SUC e PRE fora do range da VEB
+- [ ] Testar removar elementos que já não estão na VEB
+- [ ] Implementar Delete()
+- [ ] Reorganizar projeto para o padrão de classes com codependência

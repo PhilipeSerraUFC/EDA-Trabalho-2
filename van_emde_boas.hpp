@@ -1,31 +1,18 @@
 #include <bits/stdc++.h>
 #include "hashing_table.hpp"
 
-class VanEmdeBoas{
-
-    bool is_empty = true;
 
 
-    public:
-    
-    int number_of_bits;
-    int veb_min;
-    int veb_max;
-
-
-    VeBExtensibleHash* clusters;
-    VanEmdeBoas* summary;
-
-    VanEmdeBoas(int number_of_bits){
+VanEmdeBoas::VanEmdeBoas(int number_of_bits){
         this->number_of_bits = number_of_bits;
         clusters = new VeBExtensibleHash(number_of_bits/2); //Começa vazio
         summary = nullptr; //É criado quando inserimos o primeiro elemento
                             // Caso esteja vazio novamente, ele será apagado e trocado por um nullptr
     }
 
-    void Delete();
+void VanEmdeBoas::Delete(){};
 
-    void Insert(int value){
+void VanEmdeBoas::Insert(int value){
         if(is_empty){
             veb_min = value;
             veb_min = value;
@@ -60,7 +47,7 @@ class VanEmdeBoas{
             summary->Insert(high);
     }
 
-    void Remove(int value){
+void VanEmdeBoas::Remove(int value){
         if (veb_min == veb_max && veb_max == value){
             is_empty = true;
             return;
@@ -101,7 +88,7 @@ class VanEmdeBoas{
         }
     }
 
-    int Sucessor(int value){
+int VanEmdeBoas::Sucessor(int value){
         if(value < veb_min) return veb_min;
 
         if(value >= veb_max) return INFINITY;
@@ -125,7 +112,7 @@ class VanEmdeBoas{
 
     }
 
-    int Predecessor(int value){
+int VanEmdeBoas::Predecessor(int value){
 
         if(value < veb_min) return -INFINITY;
 
@@ -156,7 +143,7 @@ class VanEmdeBoas{
     //Retorna um vetor com o primeiro elemento sendo o elemento minimo
     //e o restante dos elementos são vetores que contém os valores dentro de cada clusters 
 
-    vector<vector<int>> Print(){
+vector<vector<int>> VanEmdeBoas::Print(){
         vector<vector<int>> result;
 
         result.push_back({veb_min});
@@ -179,4 +166,3 @@ class VanEmdeBoas{
         return result;
     }
 
-};
