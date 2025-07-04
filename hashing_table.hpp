@@ -14,7 +14,10 @@ Talvez não seja a melhor função Hash, porém estatisticamente os elementos es
 
 */
 
+
 class VeBExtensibleHash{
+
+    public:
 
     vector<vector<pair<int, VanEmdeBoas*>>> buckets = {};
     int values_quantity = 0;
@@ -77,7 +80,7 @@ class VeBExtensibleHash{
         if((float)this->values_quantity < MIN_OCCUPANCY_RATE*(float)hash_size) Halfing();
     };
 
-    public:
+
 
     VeBExtensibleHash(int number_of_bits){
         this->number_of_bits = number_of_bits;

@@ -112,7 +112,9 @@ void WriteText(string text){
 
 }
 
-string VanEmdeBoasPrintToText(vector<vector<int>> veb_print){
+string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
+
+    vector<vector<int>> veb_print = tree->Print();
 
     if(veb_print.size() == 0) return "\n";
 
@@ -132,10 +134,10 @@ string VanEmdeBoasPrintToText(vector<vector<int>> veb_print){
  
 
         result.append("C[ ");
-        result.append(to_string(veb_print[vec_index][0]));
+        result.append(to_string((veb_print[vec_index][0]) >> (tree->number_of_bits/2)));
         result.append("]:");
 
-        for(int index = 1; index < veb_print[vec_index].size(); index++){
+        for(int index = 0; index < veb_print[vec_index].size(); index++){
             result.append(" ");
             result.append(to_string(veb_print[vec_index][index]));
             result.append(", ");
@@ -170,7 +172,7 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
         }
 
         if(get<Command>(operation) == IMP){
-            string dfs_str = VanEmdeBoasPrintToText(tree->Print());
+            string dfs_str = VanEmdeBoasPrintToText(tree);
             text.append("IMP ");
             text.append("\n");
             text.append(dfs_str);

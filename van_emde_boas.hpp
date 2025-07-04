@@ -154,8 +154,29 @@ class VanEmdeBoas{
     }
 
     //Retorna um vetor com o primeiro elemento sendo o elemento minimo
-    //e o restante dos elementos são vetores de modo que o primeiro elemento
-    //de cada vetor é o valor da chave do cluster e depois os valores dentro dos clusters 
-    vector<vector<int>> Print();
+    //e o restante dos elementos são vetores que contém os valores dentro de cada clusters 
+
+    vector<vector<int>> Print(){
+        vector<vector<int>> result;
+
+        result.push_back({veb_min});
+
+        if(veb_min == veb_max) return result;
+
+        for(vector<pair<int, VanEmdeBoas*>> bucket : clusters->buckets){
+            for(pair<int, VanEmdeBoas*> element : bucket){
+                result.push_back({});
+                vector<vector<int>> low_values = get<VanEmdeBoas*>(element)->Print();
+                int high = get<int>(element) << (number_of_bits / 2);
+                
+                for(vector<int> vec_values: low_values) for(int value : vec_values){
+                    result[result.size()-1].push_back(value + high);
+                }
+
+            }
+        }
+
+        return result;
+    }
 
 };
