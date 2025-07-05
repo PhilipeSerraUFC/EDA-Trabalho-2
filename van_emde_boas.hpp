@@ -71,6 +71,12 @@ void VanEmdeBoas::Remove(int value){
             return;
         }
 
+        if(clusters->buckets.size() == 0){
+            //Arvore só tem um elemento, o veb_min
+            if(veb_min != value) return; //Elemento não está na arvore
+        }
+        
+
         if(value == veb_min){
             int summary_high = (summary->veb_min << number_of_bits/2);
             int next_cluster = summary->veb_min;
@@ -85,6 +91,8 @@ void VanEmdeBoas::Remove(int value){
         int low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Search(high);
+
+        if(child == nullptr) return;
 
         child->Remove(low);
 
