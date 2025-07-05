@@ -113,11 +113,17 @@ class VeBExtensibleHash{
 
     VeBExtensibleHash(int number_of_bits){
         this->number_of_bits = number_of_bits;
+        buckets = {};
+        
     }
 
     //Retorna VanEmdeBoas associada ao valor value
     VanEmdeBoas* Search(int value){
+    
+        if(buckets.size() == 0) return nullptr;
+ 
         for(pair<int, VanEmdeBoas*> element : this->buckets[HashFunction(value)]){
+
             if(get<int>(element) == value) return get<VanEmdeBoas*>(element);
         }
 
@@ -126,22 +132,24 @@ class VeBExtensibleHash{
 
     //Insere uma VanEmdeBoas na tabela e retorna seu endereço
     VanEmdeBoas* Insert(int value){
-
+        
         if(hash_size == 0){
             hash_size = 1;
-            Rehash();
+            buckets.resize(1);
         }
 
         VanEmdeBoas* result = Search(value);
-
+  
         if(result != nullptr) return result;
 
         result = new VanEmdeBoas(number_of_bits);
+
         this->buckets[HashFunction(value)].push_back(pair<int, VanEmdeBoas*>(value, result));
 
         this->values_quantity++;
 
         Rehash();
+
 
         return result;
 

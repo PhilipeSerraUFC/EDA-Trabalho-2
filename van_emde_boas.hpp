@@ -41,6 +41,7 @@ void VanEmdeBoas::Insert(int value){
         int low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Insert(high); //Se já estiver inserido, não insere um novo elemento
+
         child->Insert(low);
 
         if(child->veb_min == child->veb_max)

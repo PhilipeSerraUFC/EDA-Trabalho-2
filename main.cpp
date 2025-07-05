@@ -7,7 +7,8 @@ int main(){
     string data_path;
 
     cout << "Insira o caminho do arquivo de entrada: ";
-    cin >> data_path;
+    //cin >> data_path;
+    data_path = "in.txt";
 
     int number_of_bits = 32;
     vector<Operation> operations = ParserText(data_path);

@@ -133,7 +133,7 @@ string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
     for(int vec_index = 1; vec_index < veb_print.size(); vec_index++){
  
 
-        result.append("C[ ");
+        result.append("C[");
         result.append(to_string((veb_print[vec_index][0]) >> (tree->number_of_bits/2)));
         result.append("]:");
 
@@ -155,9 +155,9 @@ string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
 void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
     
     string text = "";
-
+    int index = 0;
     for(Operation operation : operations){
-
+        cout<<"Na linha "<<++index<<endl;
         if(get<Command>(operation) == INC){
             tree->Insert(get<int>(operation));
             text.append("INC ");
