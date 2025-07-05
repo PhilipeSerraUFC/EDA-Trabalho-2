@@ -3,3 +3,8 @@
 - [ ] Testar removar elementos que já não estão na VEB
 - [ ] Implementar Delete()
 - [ ] Reorganizar projeto para o padrão de classes com codependência
+- [ ] Implementar Incluir com sucesso
+- [ ] Implementar Imprimir com sucesso
+- [ ] Implementar Sucessor com sucesso
+- [ ] Implementar Predecessor com sucesso
+- [ ] Implementar Remover com sucesso
