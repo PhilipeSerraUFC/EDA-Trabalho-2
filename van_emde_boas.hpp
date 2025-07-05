@@ -10,7 +10,24 @@ VanEmdeBoas::VanEmdeBoas(int number_of_bits){
                             // Caso esteja vazio novamente, ele será apagado e trocado por um nullptr
     }
 
-void VanEmdeBoas::Delete(){};
+void VanEmdeBoas::Delete(){
+
+
+    for(vector<pair<int, VanEmdeBoas*>> bucket : clusters->buckets){
+        for(pair<int, VanEmdeBoas*> element : bucket){
+                get<VanEmdeBoas*>(element)->Delete();
+        }
+    }
+    
+    delete clusters;
+
+    if(summary != nullptr){
+        summary->Delete();
+        delete summary;
+    }
+    
+    delete this;
+};
 
 void VanEmdeBoas::Insert(int value){
         if(is_empty){
@@ -74,9 +91,13 @@ void VanEmdeBoas::Remove(int value){
         if(child->is_empty){
             summary->Remove(high);
             if(summary->is_empty){
-                summary->Delete();
+                //summary->Delete(); //Leva O(1), uma vez que summary não tem elementos // (Vou confiar no Garbage Colector...)
                 summary = nullptr;
             }
+
+            clusters->Remove(high);
+            //child->Delete(); //Leva O(1), uma vez que child não tem elementos // (Vou confiar no Garbage Colector...)
+
         }
 
         if(value == veb_max){

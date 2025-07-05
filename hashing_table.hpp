@@ -155,7 +155,7 @@ class VeBExtensibleHash{
 
     }
 
-    void Delete(int value){
+    void Remove(int value){
 
         if(hash_size == 0) return;
 
