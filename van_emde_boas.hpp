@@ -91,12 +91,12 @@ void VanEmdeBoas::Remove(int value){
         if(child->is_empty){
             summary->Remove(high);
             if(summary->is_empty){
-                //summary->Delete(); //Leva O(1), uma vez que summary não tem elementos // (Vou confiar no Garbage Colector...)
+                summary->Delete(); //Leva O(1), uma vez que summary não tem elementos 
                 summary = nullptr;
             }
 
             clusters->Remove(high);
-            //child->Delete(); //Leva O(1), uma vez que child não tem elementos // (Vou confiar no Garbage Colector...)
+            child->Delete(); //Leva O(1), uma vez que child não tem elementos 
 
         }
 

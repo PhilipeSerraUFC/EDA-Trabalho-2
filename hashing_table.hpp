@@ -163,14 +163,20 @@ class VeBExtensibleHash{
         int element_index = HashFunction(value);
         bool value_is_in_bucket = false;
 
+        //cout<<element_index<<endl;
+        //cout<<value<<endl;
+
         //inicializando o indice fora do for, assim o valor do indice é mantido após o termino do loop
         for(index = 0; index < this->buckets[element_index].size(); index++){
             pair<int, VanEmdeBoas*> element = this->buckets[element_index][index];
             if(get<int>(element) == value){ 
-                break;
                 value_is_in_bucket = true;
+                break;
             }
         }
+
+        //cout<<value_is_in_bucket<<endl;
+        //cout<<"-----"<<endl;
 
         if(!value_is_in_bucket) return;
 
@@ -180,6 +186,18 @@ class VeBExtensibleHash{
 
         Rehash();
 
+    }
+
+    void Print(){
+
+        cout<<"----"<<endl;
+        for(vector<pair<int, VanEmdeBoas*>> bucket : buckets){
+            for(pair<int, VanEmdeBoas*> element : bucket){
+                cout<<get<int>(element)<<" ";
+            }
+
+            cout<<"\n----"<<endl;
+        }
     }
 
 };
