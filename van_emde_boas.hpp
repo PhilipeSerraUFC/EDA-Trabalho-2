@@ -15,7 +15,7 @@ void VanEmdeBoas::Delete(){};
 void VanEmdeBoas::Insert(int value){
         if(is_empty){
             veb_min = value;
-            veb_min = value;
+            veb_max = value;
             is_empty = false;
             return;
         }
@@ -90,6 +90,8 @@ void VanEmdeBoas::Remove(int value){
     }
 
 int VanEmdeBoas::Sucessor(int value){
+        
+
         if(value < veb_min) return veb_min;
 
         if(value >= veb_max) return INFINITY;
@@ -105,6 +107,8 @@ int VanEmdeBoas::Sucessor(int value){
         if(child != nullptr and low < child->veb_max)
             return (high << (number_of_bits / 2)) + child->Sucessor(low);
 
+
+        
         int new_cluster_index = summary->Sucessor(high);
 
         VanEmdeBoas* new_child = clusters->Search(new_cluster_index); //Certamente retorna um valor não nulo por causa do summary

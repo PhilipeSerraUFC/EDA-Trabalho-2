@@ -190,7 +190,7 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
 
         if(get<Command>(operation) == PRE) {
             string pred_str = to_string(tree->Predecessor(get<int>(operation)));  
-            text.append("SUC ");
+            text.append("PRE ");
             text.append(to_string(get<int>(operation)));
             text.append("\n");
             text.append(pred_str);
