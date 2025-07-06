@@ -7,7 +7,6 @@ using namespace std;
 // Definição da constante INF
 const Int32 INF = Int32(0, true, false);
 
-// Implementação dos construtores
 Int32::Int32() {
     value = 0;
     is_pos_inf = false;
@@ -26,7 +25,6 @@ Int32::Int32(int value_, bool is_pos_inf_, bool is_neg_inf_) {
     is_neg_inf = is_neg_inf_;
 }
 
-// Implementação dos operadores aritméticos
 Int32 Int32::operator+(int value_) const {
     return Int32(value + value_, is_pos_inf, is_neg_inf);
 }

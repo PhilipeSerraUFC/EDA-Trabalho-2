@@ -16,12 +16,11 @@ struct Int32{
     bool is_pos_inf;
     bool is_neg_inf;
 
-    // Construtores - apenas declarações
     Int32();
     Int32(int value_);
     Int32(int value_, bool is_pos_inf_, bool is_neg_inf_);
 
-    // Operadores de membro - apenas declarações
+    // Operadores de membro
     Int32 operator+(int value_) const;
     Int32 operator+(const Int32& integer) const;
     Int32 operator*(int value_) const;
@@ -57,11 +56,11 @@ struct Int32{
     // Operador de conversão explícita
     explicit operator int() const;
     
-    // Operador de stream (friend pode ficar no header)
+    // Operador de stream 
     friend ostream& operator<<(ostream& os, const Int32& integer);
 };
 
-// Operadores globais - apenas declarações
+// Operadores globais
 string to_string(const Int32& integer);
 bool operator==(int value_, const Int32& integer);
 Int32 operator+(int value_, const Int32& integer);
