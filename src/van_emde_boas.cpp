@@ -183,6 +183,9 @@ Int32 VanEmdeBoas::Predecessor(Int32 value){
     //e o restante dos elementos são vetores que contém os valores dentro de cada clusters 
 
 vector<vector<Int32>> VanEmdeBoas::Print(){
+
+    if(is_empty) return {};
+
     vector<vector<Int32>> result;
 
     result.push_back({veb_min});

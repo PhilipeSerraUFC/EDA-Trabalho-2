@@ -4,8 +4,7 @@
 - [X] Implementar Delete()
 - [X] Reorganizar projeto para o padrão de classes com codependência
 - [X] Implementar Incluir com sucesso
-- [X] Implementar Imprimir com sucesso*
-- [ ] Implementar Imprimir na ordem crescente (Se possivel)
+- [X] Implementar Imprimir com sucesso
 - [X] Implementar Sucessor com sucesso
 - [X] Implementar Predecessor com sucesso
 - [X] Implementar Remover com sucesso

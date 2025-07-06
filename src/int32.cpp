@@ -110,6 +110,8 @@ bool Int32::operator<=(const Int32& integer) const {
     if(is_neg_inf && integer.is_neg_inf) return true;
     if(is_pos_inf && integer.is_neg_inf) return false;
     if(is_neg_inf && integer.is_pos_inf) return true;
+    if(is_pos_inf) return false;
+    if(is_neg_inf) return true;
     return value <= integer.value;
 }
 
@@ -124,6 +126,8 @@ bool Int32::operator>=(const Int32& integer) const {
     if(is_neg_inf && integer.is_neg_inf) return true;
     if(is_pos_inf && integer.is_neg_inf) return true;
     if(is_neg_inf && integer.is_pos_inf) return false;
+    if(is_pos_inf) return true;
+    if(is_neg_inf) return false;
     return value >= integer.value;
 }
 
@@ -138,6 +142,8 @@ bool Int32::operator>(const Int32& integer) const {
     if(is_neg_inf && integer.is_neg_inf) return false;
     if(is_pos_inf && integer.is_neg_inf) return true;
     if(is_neg_inf && integer.is_pos_inf) return false;
+    if(is_pos_inf) return true;
+    if(is_neg_inf) return false;
     return value > integer.value;
 }
 
@@ -152,6 +158,8 @@ bool Int32::operator<(const Int32& integer) const {
     if(is_neg_inf && integer.is_neg_inf) return false;
     if(is_pos_inf && integer.is_neg_inf) return false;
     if(is_neg_inf && integer.is_pos_inf) return true;
+    if(is_pos_inf) return false;
+    if(is_neg_inf) return true;
     return value < integer.value;
 }
 
@@ -164,7 +172,7 @@ bool Int32::operator!=(int value_) const {
 bool Int32::operator!=(const Int32& integer) const {
     if(is_pos_inf && integer.is_pos_inf) return false;
     if(is_neg_inf && integer.is_neg_inf) return false;
-    if((is_pos_inf || is_neg_inf) && (integer.is_neg_inf || integer.is_pos_inf)) return true;
+    if((is_pos_inf || is_neg_inf) || (integer.is_neg_inf || integer.is_pos_inf)) return true;
     return value != integer.value;
 }
 
