@@ -1,14 +1,52 @@
-#include "parser.hpp"
+#include "include/parser.hpp"
+#include "include/van_emde_boas.hpp"
+#include "include/veb_extensible_hash.hpp"
 
 using namespace std;
 
-int main(){
+void SillyTests(){
+    VeBExtensibleHash* hash = new VeBExtensibleHash(32);
 
+    hash->Insert(0);
+    hash->Insert(1);
+    hash->Insert(2);
+    hash->Insert(3);
+    hash->Insert(8);
+    hash->Print();
+
+    hash->Remove(1);
+
+    hash->Remove(3);
+
+    hash->Print();
+
+    hash->Remove(0);
+
+    hash->Remove(8);
+
+    hash->Print();
+
+    cout << "---------" << endl;
+    cout << Int32(32) + Int32(42) << endl;
+    cout << INF + Int32(42) << endl;
+    cout << (INF == -INF) << endl;
+    cout << (Int32(32) == Int32(42)) << endl;
+    cout << (Int32(42) == Int32(42)) << endl;
+    cout << (Int32(42) == 42) << endl;
+    cout << (Int32(42) == 32) << endl;
+    cout << (42 == Int32(42)) << endl;
+    cout << (Int32(42) + 32) << endl;
+    cout << (32 + Int32(42)) << endl;
+    cout << 14 + INF << endl;
+    cout << -INF + 14 << endl;
+}
+
+void ExecuteProgram(){
     string data_path;
 
     cout << "Insira o caminho do arquivo de entrada: ";
-    //cin >> data_path;
-    data_path = "in.txt";
+    cin >> data_path;
+    //data_path = "in.txt";
 
     int number_of_bits = 32;
     vector<Operation> operations = ParserText(data_path);
@@ -16,7 +54,13 @@ int main(){
 
     OperateTree(tree, operations);
 
-    cout<<"Operacoes na arvore realizada, veja o arquivo out.txt";
-    return 0;
 
+ 
+}
+
+int main(){
+
+    ExecuteProgram();
+
+    return 0;
 }

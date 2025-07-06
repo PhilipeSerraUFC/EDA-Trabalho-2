@@ -1,22 +1,13 @@
 #include <bits/stdc++.h>
-#include "van_emde_boas.hpp"
+#include "../include/parser.hpp"
 
 /*Funções para leitura do arquivo de texto de entrada e escrita do arquivo de saída*/
 
 using namespace std;
 
-const string out_path = "out.txt";
-
-enum Command {
-    /*Enumeração das possíveis operações na BST*/
-    INC, REM, SUC, PRE, IMP
-};
-
-//Alias para facilitar a leitura do codigo
-using Operation = tuple<Command,int>;
+const string out_path = "data/out.txt";
 
 /*Funções auxiliares*/
-
 vector<string> SplitString(string& str, char delimiter){
     
     std::vector<std::string> tokens;
@@ -200,6 +191,8 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
     }
 
     WriteText(text);
+
+    cout<<"Operacoes na arvore realizada, veja o arquivo "<<out_path<<endl;
 
 };
 

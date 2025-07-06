@@ -1,8 +1,9 @@
 #ifndef VANEMDEBOAS
 #define VANEMDEBOAS
 
-#include <bits/stdc++.h>
-#include "int32.hpp";
+#include <stdint.h>
+#include <vector>
+#include "int32.hpp"
 
 using namespace std;
 //forward declarations
@@ -36,3 +37,5 @@ class VanEmdeBoas {
 
         vector<vector<Int32>> Print();
 };
+
+#endif

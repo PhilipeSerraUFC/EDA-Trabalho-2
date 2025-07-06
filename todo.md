@@ -2,7 +2,7 @@
 - [ ] Fazer testes de PRE fora na VEB
 - [X] Testar remover elementos que já não estão na VEB
 - [X] Implementar Delete()
-- [ ] Reorganizar projeto para o padrão de classes com codependência
+- [X] Reorganizar projeto para o padrão de classes com codependência
 - [X] Implementar Incluir com sucesso
 - [X] Implementar Imprimir com sucesso*
 - [ ] Implementar Imprimir na ordem crescente (Se possivel)
