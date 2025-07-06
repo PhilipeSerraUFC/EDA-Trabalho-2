@@ -1,8 +1,11 @@
 # Estruturas de Dados Avançadas - Árvore Van Emde Boas
 
 Alunos:
+
 Philipe Serra - 547874
+
 Theo Araujo - 555910
+
 Guilherme Galvão - 520402
 
 # Documentação
