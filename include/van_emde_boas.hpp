@@ -1,5 +1,5 @@
-#ifndef VANEMDEBOAS
-#define VANEMDEBOAS
+#ifndef VANEMDEBOAS_HPP
+#define VANEMDEBOAS_HPP
 
 #include <stdint.h>
 #include <vector>

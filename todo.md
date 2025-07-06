@@ -1,5 +1,5 @@
 - [X] Trocar os tipos int para tipos unsigned com quantidade desejada de bits
-- [ ] Fazer testes de PRE fora na VEB
+- [X] Fazer testes de PRE fora na VEB
 - [X] Testar remover elementos que já não estão na VEB
 - [X] Implementar Delete()
 - [X] Reorganizar projeto para o padrão de classes com codependência
@@ -7,5 +7,5 @@
 - [X] Implementar Imprimir com sucesso*
 - [ ] Implementar Imprimir na ordem crescente (Se possivel)
 - [X] Implementar Sucessor com sucesso
-- [ ] Implementar Predecessor com sucesso
+- [X] Implementar Predecessor com sucesso
 - [X] Implementar Remover com sucesso

@@ -45,29 +45,29 @@ vector<Operation> ParserText(string data_path){
     while (getline(text, line)){
 
         Command command;
-        int key;
+        uint32_t key;
 
         line_index ++;
         vector<string> operation_string = SplitString(line, ' ');
 
         if (operation_string[0] == "INC"){
             command = INC;
-            key = stoi(operation_string[1]);
+            key = static_cast<uint32_t>(std::stoul(operation_string[1]));
         }
 
         else if (operation_string[0] == "REM"){
             command = REM;
-            key = stoi(operation_string[1]);
+            key = static_cast<uint32_t>(std::stoul(operation_string[1]));
         }
         
         else if (operation_string[0] == "SUC"){
             command = SUC;
-            key = stoi(operation_string[1]); 
+            key = static_cast<uint32_t>(std::stoul(operation_string[1])); 
         }
 
         else if (operation_string[0] == "PRE"){
             command = PRE;
-            key = stoi(operation_string[1]); 
+            key = static_cast<uint32_t>(std::stoul(operation_string[1])); 
         }
 
         else if (operation_string[0] == "IMP"){
@@ -150,16 +150,16 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
     for(Operation operation : operations){
         cout<<"Na linha "<<++index<<endl;
         if(get<Command>(operation) == INC){
-            tree->Insert(Int32(get<int>(operation)));
+            tree->Insert(Int32(get<uint32_t>(operation)));
             text.append("INC ");
-            text.append(to_string(get<int>(operation)));
+            text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
         }
 
         if(get<Command>(operation) == REM){
-            tree->Remove(Int32(get<int>(operation)));
+            tree->Remove(Int32(get<uint32_t>(operation)));
             text.append("REM ");
-            text.append(to_string(get<int>(operation)));
+            text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
         }
 
@@ -171,18 +171,18 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
         } 
 
         if(get<Command>(operation) == SUC) {
-            string succ_str = to_string(tree->Sucessor(get<int>(operation)));  
+            string succ_str = to_string(tree->Sucessor(get<uint32_t>(operation)));  
             text.append("SUC ");
-            text.append(to_string(get<int>(operation)));
+            text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
             text.append(succ_str);
             text.append("\n");
         };
 
         if(get<Command>(operation) == PRE) {
-            string pred_str = to_string(tree->Predecessor(get<int>(operation)));  
+            string pred_str = to_string(tree->Predecessor(get<uint32_t>(operation)));  
             text.append("PRE ");
-            text.append(to_string(get<int>(operation)));
+            text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
             text.append(pred_str);
             text.append("\n");

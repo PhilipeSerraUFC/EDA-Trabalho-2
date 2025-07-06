@@ -8,7 +8,7 @@ OBJ_DIR = obj
 
 # Compilador e flags
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I$(INCLUDE_DIR)
+CXXFLAGS = -std=c++17 -I$(INCLUDE_DIR)
 LDFLAGS = 
 
 # Detectar sistema operacional
@@ -50,7 +50,12 @@ clean:
 	$(RMDIR)
 
 # Executar
+args = $(filter-out $@,$(MAKECMDGOALS))
+
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) $(args)
+
+%:
+    @:
 
 .PHONY: all clean run

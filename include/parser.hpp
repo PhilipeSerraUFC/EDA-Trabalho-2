@@ -12,7 +12,7 @@ enum Command {
 };
 
 //Alias para facilitar a leitura do codigo
-using Operation = tuple<Command,int>;
+using Operation = tuple<Command,uint32_t>;
 
 vector<string> SplitString(string&, char);
 

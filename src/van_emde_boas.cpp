@@ -159,9 +159,6 @@ Int32 VanEmdeBoas::Predecessor(Int32 value){
 
     VanEmdeBoas* child = clusters->Search(high);
 
-    if(child != nullptr && high == 0 && low <= child->veb_min){
-        return veb_min;
-    }
 
     if(child != nullptr && low > child->veb_min){
         Int32 pred = child->Predecessor(low);
@@ -169,11 +166,15 @@ Int32 VanEmdeBoas::Predecessor(Int32 value){
         if(pred == -INF) return (high << (number_of_bits / 2)) + child->veb_min;
         else return (high << (number_of_bits / 2)) + pred;
     }
-        
+
     Int32 new_cluster_index = summary->Predecessor(high);
-    cout<<new_cluster_index<<endl;
+    
+    if(new_cluster_index == -INF){
+        return veb_min;
+    }
+
     VanEmdeBoas* new_child = clusters->Search(new_cluster_index); //Certamente retorna um valor não nulo por causa do summary
-    cout<<new_child->veb_max<<endl;
+
     return (new_cluster_index << (number_of_bits / 2)) + new_child->veb_max;
 
 }

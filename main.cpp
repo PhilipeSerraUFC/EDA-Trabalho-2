@@ -47,6 +47,8 @@ void ExecuteProgram(string data_path){
     vector<Operation> operations = ParserText(data_path);
     VanEmdeBoas* tree = new VanEmdeBoas(number_of_bits);
 
+
+
     OperateTree(tree, operations);
  
 }
