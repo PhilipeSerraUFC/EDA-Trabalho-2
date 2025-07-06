@@ -51,12 +51,6 @@ make
 ./main caminho/para/arquivo_entrada.txt
 ```
 
-No Windows:
-
-```cmd
-main.exe caminho\para\arquivo_entrada.txt
-```
-
 4. **Verifique o resultado**: Após a execução, os resultados das operações estarão disponíveis no arquivo `data/out.txt`.
 
 ### Comandos do Makefile

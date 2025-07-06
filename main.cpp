@@ -41,26 +41,26 @@ void SillyTests(){
     cout << -INF + 14 << endl;
 }
 
-void ExecuteProgram(){
-    string data_path;
-
-    cout << "Insira o caminho do arquivo de entrada: ";
-    cin >> data_path;
-    //data_path = "in.txt";
+void ExecuteProgram(string data_path){
 
     int number_of_bits = 32;
     vector<Operation> operations = ParserText(data_path);
     VanEmdeBoas* tree = new VanEmdeBoas(number_of_bits);
 
     OperateTree(tree, operations);
-
-
  
 }
 
-int main(){
+int main(int argc, char* argv[]){
 
-    ExecuteProgram();
+    if(argc != 2){
+        cerr << "parametro invalido para o programa" << endl;
+        exit(1);
+    }
+
+    string data_path = argv[1];
+
+    ExecuteProgram(data_path);
 
     return 0;
 }
