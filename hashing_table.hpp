@@ -1,37 +1,37 @@
 #include <bits/stdc++.h>
+#include "int32.hpp"
 
 using namespace std; 
 
 //forward declaration
 class VeBExtensibleHash;
 
-//forward declaration
 class VanEmdeBoas { 
     private:
         bool is_empty = true;
 
     public: 
 
-        int number_of_bits;
-        int veb_min;
-        int veb_max;
+        uint8_t number_of_bits;
+        Int32 veb_min;
+        Int32 veb_max;
 
         VeBExtensibleHash* clusters;
         VanEmdeBoas* summary;
 
-        VanEmdeBoas(int);
+        VanEmdeBoas(uint8_t);
 
         void Delete();
 
-        void Insert(int);
+        void Insert(Int32);
 
-        void Remove(int);
+        void Remove(Int32);
 
-        int Sucessor(int);
+        Int32 Sucessor(Int32);
 
-        int Predecessor(int);
+        Int32 Predecessor(Int32);
 
-        vector<vector<int>> Print();
+        vector<vector<Int32>> Print();
 };
 
 
@@ -48,15 +48,15 @@ class VeBExtensibleHash{
 
     public:
 
-    vector<vector<pair<int, VanEmdeBoas*>>> buckets = {};
-    int values_quantity = 0;
-    int hash_size = 0;
-    int number_of_bits;
+    vector<vector<pair<Int32, VanEmdeBoas*>>> buckets = {};
+    uint32_t  values_quantity = 0;
+    uint32_t hash_size = 0;
+    uint8_t  number_of_bits;
 
     const float MAX_OCCUPANCY_RATE = 0.75;
     const float MIN_OCCUPANCY_RATE = 0.25;
 
-    int HashFunction(int value){
+    int HashFunction(Int32 value){
         return value % hash_size;
     }
 
@@ -68,11 +68,11 @@ class VeBExtensibleHash{
         for(int bucket_index = 0; bucket_index < hash_size/2; bucket_index++){
             for(int vec_index = 0; vec_index < this->buckets[bucket_index].size(); vec_index++){
                 
-                pair<int, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
-                if(HashFunction(get<int>(element)) != bucket_index){
+                pair<Int32, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
+                if(HashFunction(get<Int32>(element)) != bucket_index){
                     this->buckets[bucket_index].erase(this->buckets[bucket_index].begin() + vec_index);
                     vec_index -= 1; //Volta uma casas
-                    this->buckets[HashFunction(get<int>(element))].push_back(element);
+                    this->buckets[HashFunction(get<Int32>(element))].push_back(element);
                 }
 
             }
@@ -90,11 +90,11 @@ class VeBExtensibleHash{
         for(int bucket_index = 0; bucket_index < 2*hash_size; bucket_index++){
             for(int vec_index = 0; vec_index < this->buckets[bucket_index].size(); vec_index++){
                 
-                pair<int, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
-                if(HashFunction(get<int>(element)) != bucket_index){
+                pair<Int32, VanEmdeBoas*> element = this->buckets[bucket_index][vec_index];
+                if(HashFunction(get<Int32>(element)) != bucket_index){
                     this->buckets[bucket_index].erase(this->buckets[bucket_index].begin() + vec_index);
                     vec_index -= 1; //Volta uma casas
-                    this->buckets[HashFunction(get<int>(element))].push_back(element);
+                    this->buckets[HashFunction(get<Int32>(element))].push_back(element);
                 }
 
             }
@@ -111,27 +111,27 @@ class VeBExtensibleHash{
 
 
 
-    VeBExtensibleHash(int number_of_bits){
+    VeBExtensibleHash(uint8_t number_of_bits){
         this->number_of_bits = number_of_bits;
         buckets = {};
         
     }
 
     //Retorna VanEmdeBoas associada ao valor value
-    VanEmdeBoas* Search(int value){
+    VanEmdeBoas* Search(Int32 value){
     
         if(buckets.size() == 0) return nullptr;
  
-        for(pair<int, VanEmdeBoas*> element : this->buckets[HashFunction(value)]){
+        for(pair<Int32, VanEmdeBoas*> element : this->buckets[HashFunction(value)]){
 
-            if(get<int>(element) == value) return get<VanEmdeBoas*>(element);
+            if(get<Int32>(element) == value) return get<VanEmdeBoas*>(element);
         }
 
         return nullptr; //Não encontrou o valor dentro da tabela
     }
 
     //Insere uma VanEmdeBoas na tabela e retorna seu endereço
-    VanEmdeBoas* Insert(int value){
+    VanEmdeBoas* Insert(Int32 value){
         
         if(hash_size == 0){
             hash_size = 1;
@@ -144,7 +144,7 @@ class VeBExtensibleHash{
 
         result = new VanEmdeBoas(number_of_bits);
 
-        this->buckets[HashFunction(value)].push_back(pair<int, VanEmdeBoas*>(value, result));
+        this->buckets[HashFunction(value)].push_back(pair<Int32, VanEmdeBoas*>(value, result));
 
         this->values_quantity++;
 
@@ -155,7 +155,7 @@ class VeBExtensibleHash{
 
     }
 
-    void Remove(int value){
+    void Remove(Int32 value){
 
         if(hash_size == 0) return;
 
@@ -168,8 +168,8 @@ class VeBExtensibleHash{
 
         //inicializando o indice fora do for, assim o valor do indice é mantido após o termino do loop
         for(index = 0; index < this->buckets[element_index].size(); index++){
-            pair<int, VanEmdeBoas*> element = this->buckets[element_index][index];
-            if(get<int>(element) == value){ 
+            pair<Int32, VanEmdeBoas*> element = this->buckets[element_index][index];
+            if(get<Int32>(element) == value){ 
                 value_is_in_bucket = true;
                 break;
             }
@@ -191,9 +191,9 @@ class VeBExtensibleHash{
     void Print(){
 
         cout<<"----"<<endl;
-        for(vector<pair<int, VanEmdeBoas*>> bucket : buckets){
-            for(pair<int, VanEmdeBoas*> element : bucket){
-                cout<<get<int>(element)<<" ";
+        for(vector<pair<Int32, VanEmdeBoas*>> bucket : buckets){
+            for(pair<Int32, VanEmdeBoas*> element : bucket){
+                cout<<get<Int32>(element)<<" ";
             }
 
             cout<<"\n----"<<endl;

@@ -1,9 +1,7 @@
 #include <bits/stdc++.h>
 #include "hashing_table.hpp"
 
-
-
-VanEmdeBoas::VanEmdeBoas(int number_of_bits){
+VanEmdeBoas::VanEmdeBoas(uint8_t number_of_bits){
         this->number_of_bits = number_of_bits;
         clusters = new VeBExtensibleHash(number_of_bits/2); //Começa vazio
         summary = nullptr; //É criado quando inserimos o primeiro elemento
@@ -13,8 +11,8 @@ VanEmdeBoas::VanEmdeBoas(int number_of_bits){
 void VanEmdeBoas::Delete(){
 
 
-    for(vector<pair<int, VanEmdeBoas*>> bucket : clusters->buckets){
-        for(pair<int, VanEmdeBoas*> element : bucket){
+    for(vector<pair<Int32, VanEmdeBoas*>> bucket : clusters->buckets){
+        for(pair<Int32, VanEmdeBoas*> element : bucket){
                 get<VanEmdeBoas*>(element)->Delete();
         }
     }
@@ -29,7 +27,7 @@ void VanEmdeBoas::Delete(){
     delete this;
 };
 
-void VanEmdeBoas::Insert(int value){
+void VanEmdeBoas::Insert(Int32 value){
         if(is_empty){
             veb_min = value;
             veb_max = value;
@@ -52,10 +50,10 @@ void VanEmdeBoas::Insert(int value){
         if(value > veb_max) veb_max = value;
 
         //Pegando os bits da metade direita
-        int high = value >> (number_of_bits / 2);
+        Int32 high = value >> (number_of_bits / 2);
 
         //Pegando os bits da metade esquerda
-        int low = value - (high << (number_of_bits / 2));
+        Int32 low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Insert(high); //Se já estiver inserido, não insere um novo elemento
 
@@ -65,7 +63,7 @@ void VanEmdeBoas::Insert(int value){
             summary->Insert(high);
     }
 
-void VanEmdeBoas::Remove(int value){
+void VanEmdeBoas::Remove(Int32 value){
         if (veb_min == veb_max && veb_max == value){
             is_empty = true;
             return;
@@ -78,17 +76,17 @@ void VanEmdeBoas::Remove(int value){
         
 
         if(value == veb_min){
-            int summary_high = (summary->veb_min << number_of_bits/2);
-            int next_cluster = summary->veb_min;
+            Int32 summary_high = (summary->veb_min << number_of_bits/2);
+            Int32 next_cluster = summary->veb_min;
             veb_min = summary_high + clusters->Search(next_cluster)->veb_min;
             value = veb_min;
         }
 
         //Pegando os bits da metade direita
-        int high = value >> (number_of_bits / 2);
+        Int32 high = value >> (number_of_bits / 2);
 
         //Pegando os bits da metade esquerda
-        int low = value - (high << (number_of_bits / 2));
+        Int32 low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Search(high);
 
@@ -111,25 +109,25 @@ void VanEmdeBoas::Remove(int value){
         if(value == veb_max){
             if(summary == nullptr) veb_max = veb_min;
             else{
-                int summary_high = (summary->veb_max << number_of_bits/2);
-                int next_cluster = summary->veb_max;
+                Int32 summary_high = (summary->veb_max << number_of_bits/2);
+                Int32 next_cluster = summary->veb_max;
                 veb_max = summary_high + clusters->Search(next_cluster)->veb_max;
             }
         }
     }
 
-int VanEmdeBoas::Sucessor(int value){
+Int32 VanEmdeBoas::Sucessor(Int32 value){
         
 
         if(value < veb_min) return veb_min;
 
-        if(value >= veb_max) return INFINITY;
+        if(value >= veb_max) return INF;
 
         //Pegando os bits da metade direita
-        int high = value >> (number_of_bits / 2);
+        Int32 high = value >> (number_of_bits / 2);
 
         //Pegando os bits da metade esquerda
-        int low = value - (high << (number_of_bits / 2));
+        Int32 low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Search(high);
 
@@ -138,7 +136,7 @@ int VanEmdeBoas::Sucessor(int value){
 
 
         
-        int new_cluster_index = summary->Sucessor(high);
+        Int32 new_cluster_index = summary->Sucessor(high);
 
         VanEmdeBoas* new_child = clusters->Search(new_cluster_index); //Certamente retorna um valor não nulo por causa do summary
         
@@ -146,30 +144,35 @@ int VanEmdeBoas::Sucessor(int value){
 
     }
 
-int VanEmdeBoas::Predecessor(int value){
+Int32 VanEmdeBoas::Predecessor(Int32 value){
 
-        if(value < veb_min) return -INFINITY;
+        if(value <= veb_min) return -INF;
 
-        if(value >= veb_max) return veb_max;
+        if(value > veb_max) return veb_max;
 
         //Pegando os bits da metade direita
-        int high = value >> (number_of_bits / 2);
+        Int32 high = value >> (number_of_bits / 2);
 
         //Pegando os bits da metade esquerda
-        int low = value - (high << (number_of_bits / 2));
+        Int32 low = value - (high << (number_of_bits / 2));
 
         VanEmdeBoas* child = clusters->Search(high);
 
-        if(child != nullptr and low > child->veb_min){
-            int pred = child->Predecessor(low);
-            if(pred == -INFINITY) return (high << (number_of_bits / 2)) + child->veb_min;
-            else return (high << (number_of_bits / 2)) + pred;
+        if(child != nullptr && high == 0 && low <= child->veb_min){
+            return veb_min;
         }
 
-        int new_cluster_index = summary->Predecessor(high);
-
-        VanEmdeBoas* new_child = clusters->Search(new_cluster_index); //Certamente retorna um valor não nulo por causa do summary
+        if(child != nullptr && low > child->veb_min){
+            Int32 pred = child->Predecessor(low);
+            
+            if(pred == -INF) return (high << (number_of_bits / 2)) + child->veb_min;
+            else return (high << (number_of_bits / 2)) + pred;
+        }
         
+        Int32 new_cluster_index = summary->Predecessor(high);
+        cout<<new_cluster_index<<endl;
+        VanEmdeBoas* new_child = clusters->Search(new_cluster_index); //Certamente retorna um valor não nulo por causa do summary
+        cout<<new_child->veb_max<<endl;
         return (new_cluster_index << (number_of_bits / 2)) + new_child->veb_max;
 
     }
@@ -177,20 +180,20 @@ int VanEmdeBoas::Predecessor(int value){
     //Retorna um vetor com o primeiro elemento sendo o elemento minimo
     //e o restante dos elementos são vetores que contém os valores dentro de cada clusters 
 
-vector<vector<int>> VanEmdeBoas::Print(){
-        vector<vector<int>> result;
+vector<vector<Int32>> VanEmdeBoas::Print(){
+        vector<vector<Int32>> result;
 
         result.push_back({veb_min});
 
         if(veb_min == veb_max) return result;
 
-        for(vector<pair<int, VanEmdeBoas*>> bucket : clusters->buckets){
-            for(pair<int, VanEmdeBoas*> element : bucket){
+        for(vector<pair<Int32, VanEmdeBoas*>> bucket : clusters->buckets){
+            for(pair<Int32, VanEmdeBoas*> element : bucket){
                 result.push_back({});
-                vector<vector<int>> low_values = get<VanEmdeBoas*>(element)->Print();
-                int high = get<int>(element) << (number_of_bits / 2);
+                vector<vector<Int32>> low_values = get<VanEmdeBoas*>(element)->Print();
+                Int32 high = get<Int32>(element) << (number_of_bits / 2);
                 
-                for(vector<int> vec_values: low_values) for(int value : vec_values){
+                for(vector<Int32> vec_values: low_values) for(Int32 value : vec_values){
                     result[result.size()-1].push_back(value + high);
                 }
 

@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 #include "parser.hpp"
+#include "int32.hpp"
 using namespace std;
-
-int inf(){ return INFINITY; }
 
 int main(){
     VeBExtensibleHash* hash = new VeBExtensibleHash(32);
@@ -25,6 +24,20 @@ int main(){
     hash->Remove(8);
 
     hash->Print();
+
+    cout << "---------" << endl;
+    cout << Int32(32) + Int32(42) << endl;
+    cout << INF + Int32(42) << endl;
+    cout << (INF == -INF) << endl;
+    cout << (Int32(32) == Int32(42)) << endl;
+    cout << (Int32(42) == Int32(42)) << endl;
+    cout << (Int32(42) == 42) << endl;
+    cout << (Int32(42) == 32) << endl;
+    cout << (42 == Int32(42)) << endl;
+    cout << (Int32(42) + 32) << endl;
+    cout << (32 + Int32(42)) << endl;
+    cout << 14 + INF << endl;
+    cout << -INF + 14 << endl;
 
 
 }
