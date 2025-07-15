@@ -9,4 +9,4 @@
 - [X] Implementar Predecessor com sucesso
 - [X] Implementar Remover com sucesso
 - [ ] Fazer testes com as funções com potências de dois grandes
-- [ ] Trocar ints nos operators do Int32 por uint32_t
+- [ ] Fazer testes com edges cases
