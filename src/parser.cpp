@@ -77,7 +77,7 @@ vector<Operation> ParserText(string data_path){
 
         else {
             cerr << "Operacao Invalida na linha " << line_index << endl;
-            exit(1);
+            //exit(1);
         }
 
         Operation op = Operation(command, key);
@@ -89,7 +89,7 @@ vector<Operation> ParserText(string data_path){
     return result;
 }
 
-void WriteText(string text){
+void WriteText(string text, string out_path){
     std::ofstream file(out_path); 
 
     if (file.is_open()) {
@@ -107,7 +107,7 @@ string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
 
     vector<vector<Int32>> veb_print = tree->Print();
 
-    if(veb_print.size() == 0) return "\n";
+    if(veb_print.size() == 0) return "None\n";
 
     string result;
 
@@ -143,12 +143,12 @@ string VanEmdeBoasPrintToText(VanEmdeBoas* tree){
     return result;
 }
 
-void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
+void OperateTree(VanEmdeBoas* tree, vector<Operation> operations, string out_path){
     
     string text = "";
     int index = 0;
     for(Operation operation : operations){
-        cout<<"Na linha "<<++index<<endl;
+        //cout<<"Na linha "<<++index<<endl;
         if(get<Command>(operation) == INC){
             tree->Insert(Int32(get<uint32_t>(operation)));
             text.append("INC ");
@@ -156,41 +156,46 @@ void OperateTree(VanEmdeBoas* tree, vector<Operation> operations){
             text.append("\n");
         }
 
-        if(get<Command>(operation) == REM){
+        else if(get<Command>(operation) == REM){
             tree->Remove(Int32(get<uint32_t>(operation)));
             text.append("REM ");
             text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
         }
 
-        if(get<Command>(operation) == IMP){
+        else if(get<Command>(operation) == IMP){
             string dfs_str = VanEmdeBoasPrintToText(tree);
             text.append("IMP ");
             text.append("\n");
             text.append(dfs_str);
         } 
 
-        if(get<Command>(operation) == SUC) {
+        else if(get<Command>(operation) == SUC) {
             string succ_str = to_string(tree->Sucessor(get<uint32_t>(operation)));  
             text.append("SUC ");
             text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
             text.append(succ_str);
             text.append("\n");
-        };
+        }
 
-        if(get<Command>(operation) == PRE) {
+        else if(get<Command>(operation) == PRE) {
             string pred_str = to_string(tree->Predecessor(get<uint32_t>(operation)));  
             text.append("PRE ");
             text.append(to_string(get<uint32_t>(operation)));
             text.append("\n");
             text.append(pred_str);
             text.append("\n");
-        };
+        }
+
+        else{
+            cout<<"Linha inváida: "<<index<<"\n";
+
+        }
 
     }
 
-    WriteText(text);
+    WriteText(text, out_path);
 
     cout<<"Operacoes na arvore realizada, veja o arquivo "<<out_path<<endl;
 

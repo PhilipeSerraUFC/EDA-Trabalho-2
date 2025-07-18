@@ -118,7 +118,9 @@ void VanEmdeBoas::Remove(Int32 value){
 }
 
 Int32 VanEmdeBoas::Sucessor(Int32 value){
-        
+    
+    if(is_empty) return INF;
+
 
     if(value < veb_min) return veb_min;
 
@@ -146,6 +148,8 @@ Int32 VanEmdeBoas::Sucessor(Int32 value){
 }
 
 Int32 VanEmdeBoas::Predecessor(Int32 value){
+
+    if(is_empty) return -INF;
 
     if(value <= veb_min) return -INF;
 

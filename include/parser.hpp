@@ -2,6 +2,7 @@
 #define PARSER_HPP
 
 #include "van_emde_boas.hpp"
+#include <string>
 
 extern const string out_path;
 
@@ -18,10 +19,10 @@ vector<string> SplitString(string&, char);
 
 vector<Operation> ParserText(string);
 
-void WriteText(string);
+void WriteText(string, string);
 
 string VanEmdeBoasPrintToText(VanEmdeBoas*);
 
-void OperateTree(VanEmdeBoas*, vector<Operation>);
+void OperateTree(VanEmdeBoas*, vector<Operation>, string);
 
 #endif
