@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "../include/parser.hpp"
+#include "parser.hpp"
 
 /*Funções para leitura do arquivo de texto de entrada e escrita do arquivo de saída*/
 

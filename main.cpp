@@ -1,6 +1,6 @@
-#include "include/parser.hpp"
-#include "include/van_emde_boas.hpp"
-#include "include/veb_extensible_hash.hpp"
+#include "parser.hpp"
+#include "van_emde_boas.hpp"
+#include "veb_extensible_hash.hpp"
 #include <fstream>
 
 using namespace std;

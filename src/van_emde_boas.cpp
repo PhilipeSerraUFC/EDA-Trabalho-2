@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include "..\include\van_emde_boas.hpp"
-#include "..\include\veb_extensible_hash.hpp"
+#include "van_emde_boas.hpp"
+#include "veb_extensible_hash.hpp"
 
 VanEmdeBoas::VanEmdeBoas(uint8_t number_of_bits){
         this->number_of_bits = number_of_bits;

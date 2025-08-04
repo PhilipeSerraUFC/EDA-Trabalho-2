@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "../include/veb_extensible_hash.hpp"
+#include "veb_extensible_hash.hpp"
 using namespace std; 
 
 /* Hashing table com Doubling/Having
